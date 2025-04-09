@@ -33,7 +33,7 @@ project '*'
 project 'assimp'
 	kind 'StaticLib'
 	warnings 'Off'
-	optimize 'Speed'
+	-- optimize 'Speed'
 	cppdialect "C++17"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -154,3 +154,18 @@ project 'assimp'
         'RAPIDJSON_HAS_STDSTRING=1'
 
 	}
+
+	filter "configurations:Debug"
+		defines "HZ_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "HZ_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "HZ_DIST"
+		runtime "Release"
+		optimize "on"
